@@ -30,6 +30,8 @@ class Helper {
      */
     public static function exad_wp_kses( $string, $extra_allowed_html = array() ) {
 		
+        $allowed_tags = wp_kses_allowed_html('post');
+		
         $allowed_html = array(
             'b' => array(),
             's' => array(),
@@ -55,7 +57,8 @@ class Helper {
                 'title' => array()
             ),
 			'div' => array(
-				'class' => array()
+				'class' => array(),
+				'data-tabs' => array()
 			),
 			'h1' => array(
 				'class' => array()
@@ -81,6 +84,16 @@ class Helper {
 			'span' => array(
 				'class' => array()
 			),
+			'ul' => array(
+				'class' => array()
+			),
+			'ol' => array(
+				'class' => array()
+			),
+			'li' => array(
+				'class' => array(),
+				'data-tab' => array()
+			),
             'a' => array(
 				'href' => array(), 
 				'target' => array(), 
@@ -96,8 +109,18 @@ class Helper {
 				'height' => array(),
 				'width' => array()
 			),
-			'hr' => array()
+			'hr' => array(),
+			'svg' => array(
+				'class' => array(),
+				'viewbox' => array(),
+				'viewBox' => array()
+			),
+			'path' => array(
+				'd' => array(),
+			)
         );
+		
+        $allowed_html = array_merge_recursive( $allowed_html, $allowed_tags );
 		
         $allowed_html = array_merge_recursive( $allowed_html, $extra_allowed_html );
 		
